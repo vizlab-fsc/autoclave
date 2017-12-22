@@ -13,7 +13,24 @@ def format_timestamp(ts):
 
 @app.route('/')
 def index():
-    return render_template('overview.html', data=dataset.values())
+    imgs = list(dataset.values())
+    imgs = sorted(imgs, key=lambda im: im['usages'][-1]['timestamp'])
+    most_used = max(imgs, key=lambda im: len(im['usages']))
+    most_recent = imgs[-1]
+    most_relatives = max(imgs, key=lambda im: len(im['relatives']))
+    highlights = {
+        'most used': most_used,
+        'most recent': most_recent,
+        'most relatives': most_relatives
+    }
+    earliest = min(imgs, key=lambda im: min(im['usages'], key=lambda u: u['timestamp'])['timestamp'])
+    meta = {
+        'start_ts': earliest['usages'][0]['timestamp'],
+        'end_ts': most_recent['usages'][-1]['timestamp'],
+        'n': len(imgs),
+        'n_usages': sum(len(im['usages']) for im in imgs)
+    }
+    return render_template('overview.html', highlights=highlights, meta=meta)
 
 
 @app.route('/map')

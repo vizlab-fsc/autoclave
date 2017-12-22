@@ -1,0 +1,36 @@
+{% extends 'layout.html' %}
+{% block content %}
+<div class="overview">
+    <h2>Dataset spans {{ meta.start_ts|tsformat }} to {{ meta.end_ts|tsformat }}.</h2>
+    <h2>There are {{ meta.n }} unique images across {{ meta.n_usages }} usages.</h2>
+</div>
+<ul class="highlights">
+{% for name, image in highlights.items() %}
+    <li class="highlight card">
+        <div class="card-name">{{ name|title }}</div>
+        <div class="card-body">
+            <div class="highlight-image">
+                <a href="{{ url_for('image', id=image.id) }}">
+                    <figure style="background-image:url('{{  image.usages[0].media_url }}');">
+                    </figure>
+                </a>
+                <ul>
+                    <div class="stat">
+                        <div class="stat-name">Last seen</div>
+                        <div class="stat-val"><span class="ts">{{ image.usages[-1]['timestamp']|tsformat }}</span> on <span class="domain">4chan:pol</span></div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-name">Usages</div>
+                        <div class="stat-val">{{ image.usages|length }} usages across 1 site</div>
+                    </div>
+                    <div class="stat">
+                        <div class="stat-name">Hash</div>
+                        <div class="stat-val"><span class="hash">{{ image.hash }}</span></div>
+                    </div>
+                </ul>
+            </div>
+        </div>
+    </li>
+{% endfor %}
+</ul>
+{% endblock %}

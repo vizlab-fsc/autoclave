@@ -1,0 +1,166 @@
+ @import url('https://fonts.googleapis.com/css?family=Space+Mono');
+
+* {
+  box-sizing: border-box;
+}
+
+html, body {
+  margin: 0;
+  padding: 0;
+  background: #eee;
+  font-family: 'Helvetica', 'Arial', sans-serif;
+}
+
+ul {
+  list-style-type: none;
+  padding: 0;
+  margin: 0;
+}
+
+figure {
+  margin: 0;
+  padding: 0;
+}
+.image {
+  max-width: 400px;
+  max-height: 600px;
+}
+img {
+  max-width: 100%;
+  max-height: 100%;
+}
+
+#tooltip {
+  position: fixed;
+  padding: 1em;
+  background: #222;
+  color: #fff;
+  z-index: 1;
+  top: 0;
+  left: 0;
+  font-size: 0.9em;
+  display: none;
+}
+
+.image-single {
+  max-width: 720px;
+  padding: 2em;
+  margin: 0 auto;
+}
+.image-main {
+  display: flex;
+}
+.image-main > figure, div {
+  flex: 1;
+}
+.genealogy {
+  padding: 0 1em;
+}
+.genealogy li {
+  display: inline-block;
+}
+.genealogy img {
+  max-width: 120px;
+}
+h1 {
+  margin-top: 0;
+}
+section {
+  margin-bottom: 1em;
+}
+
+.usage {
+  margin: 0 0 1em 0;
+  background: #f0f0f0;
+  padding: 1em;
+  display: flex;
+}
+h5 {
+  margin-bottom: 0;
+}
+.usage-info {
+  padding: 0 0 0 1em;
+}
+.usage-info .usage-fact:first-child h5 {
+  margin-top: 0;
+}
+.usage figure, .usage-info {
+  flex: 1;
+}
+
+.overview {
+  padding: 1em;
+}
+.highlights {
+  display: flex;
+}
+.highlight {
+  margin: 0 0.5em;
+}
+.highlight figure {
+  height: 250px;
+  width: 400px;
+  background-size: cover;
+  background-position: center center;
+}
+/* .highlight .card-name { */
+/*   background: blue; */
+/* } */
+
+/* --- */
+
+a, a:visited {
+  color: #005dff;
+}
+
+.card {
+  color: #fff;
+}
+
+.card-no-title {
+  padding: 1em;
+  border-radius: 0.5em;
+  background: #222;
+}
+
+.card-name, .card-body {
+  padding: 1em;
+}
+.card-name {
+  background: #151515;
+  border-radius: 0.5em 0.5em 0 0;
+}
+.card-body {
+  background: #222;
+  border-radius: 0 0 0.5em 0.5em;
+}
+
+.stat {
+  margin: 1em 0;
+}
+
+.stat-name {
+  margin: 0 0 0.2em 0;
+  font-size: 0.9em;
+  opacity: 0.65;
+}
+
+.domain {
+  background: #2727d7;
+  color: #fff;
+  padding: 0.1em 0.4em;
+  border-radius: 0.2em;
+  font-size: 0.8em;
+  font-family: 'Space Mono', monospace;
+  display: inline-block;
+}
+
+.hash {
+  background: #fc4444;
+  color: #fff;
+  padding: 0.1em 0.4em;
+  border-radius: 0.2em;
+  font-size: 0.8em;
+  font-family: 'Space Mono', monospace;
+  display: inline-block;
+}
