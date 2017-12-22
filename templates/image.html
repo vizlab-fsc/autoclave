@@ -1,0 +1,72 @@
+{% macro render_usage(usage) %}
+<li class="usage">
+    <figure>
+        <img src="{{ usage['media_url'] }}">
+    </figure>
+    <div class="usage-info">
+        <div class="usage-fact">
+            <h5>Posted On</h5>
+            {{ usage['timestamp']|tsformat }}
+        </div>
+        <div class="usage-fact">
+            <h5>Author</h5>
+            {{ usage['author'] }}
+        </div>
+        <div class="usage-fact">
+            <h5>Post (<a href="{{ usage['url'] }}">{{ usage['lid'] }}</a>)</h5>
+            <code>{{ usage['content'] }}</code>
+        </div>
+        <div class="usage-fact">
+            <h5>Hash</h5>
+            <pre class="hash">{{ usage['hash'] }}</pre>
+        </div>
+    </div>
+</li>
+{% endmacro %}
+
+{% extends 'layout.html' %}
+{% block content %}
+<div class="image-single">
+    <section class="image-main">
+        <figure class="image">
+            <a href="{{ image.usages[0].media_url }}"><img src="{{ image.usages[0].media_url }}" alt="{{ image.hash }}" title="{{ image.hash }}"></a>
+        </figure>
+        <div class="genealogy">
+            <h1>Genealogy</h1>
+            <div class="genealogy-relatives genealogy-ancestors">
+                {% if image.genealogy.ancestors %}
+                    <h2>Possible ancestors</h2>
+                    <ul>
+                        {% for img, dist in image.genealogy.ancestors %}
+                            <li><a href="{{ url_for('image', id=img.id) }}"><img src="{{ img.usages[0].media_url }}" alt="{{ dist }}" title="{{ dist }}"></a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h4>No suspected ancestors.</h4>
+                {% endif %}
+            </div>
+            <div class="genealogy-relatives genealogy-descendants">
+                {% if image.genealogy.descendants %}
+                    <h2>Possible descendants</h2>
+                    <ul>
+                        {% for img, dist in image.genealogy.descendants %}
+                            <li><a href="{{ url_for('image', id=img.id) }}"><img src="{{ img.usages[0].media_url }}" alt="{{ dist }}" title="{{ dist }}"></a></li>
+                        {% endfor %}
+                    </ul>
+                {% else %}
+                    <h4>No suspected descendants.</h4>
+                {% endif %}
+            </div>
+        </div>
+    </section>
+    <section class="image-aux">
+        <h1>Usages</h1>
+        <ul class="usages">
+            {% for usage in image.usages %}
+                {{ render_usage(usage) }}
+            {% endfor %}
+        </ul>
+    </section>
+</div>
+{% endblock %}
+
